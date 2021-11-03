@@ -13,12 +13,9 @@ public class ErrorResponse {
     private List<FieldErrorCustom> errors = new ArrayList<>();
     private String code;
 
-    public ErrorResponse(ErrorCode invalidInputValue, BindingResult bindingResult) {
-        this.code = invalidInputValue.getCode();
-        this.message = invalidInputValue.getMessage();
+    public ErrorResponse(BindingResult bindingResult) {
         for (FieldError e : bindingResult.getFieldErrors()) {
-            this.errors.add(
-                    new FieldErrorCustom(e.getField(), e.getRejectedValue(), e.getDefaultMessage()));
+            this.errors.add(new FieldErrorCustom(e.getField(), e.getRejectedValue(), e.getDefaultMessage()));
         }
     }
 
@@ -32,6 +29,7 @@ public class ErrorResponse {
         private String field;
         private String value;
         private String reason;
+
         protected FieldErrorCustom(){}
         public FieldErrorCustom(String field, Object rejectedValue, String defaultMessage) {
             this.field = field;

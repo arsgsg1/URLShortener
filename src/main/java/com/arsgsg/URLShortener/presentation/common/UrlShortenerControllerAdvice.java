@@ -7,7 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+@RestControllerAdvice(basePackageClasses = {UrlShortenerController.class})
 public class UrlShortenerControllerAdvice {
     @ExceptionHandler(UrlShortenerException.class)
     public ResponseEntity<ErrorResponse> UrlShortenerAdvice(UrlShortenerException e){
@@ -16,7 +16,7 @@ public class UrlShortenerControllerAdvice {
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> MethodArgumentNotValidAdvice(MethodArgumentNotValidException e){
-        final ErrorResponse response = new ErrorResponse(ErrorCode.INVALID_INPUT_URL, e.getBindingResult());
+        final ErrorResponse response = new ErrorResponse(e.getBindingResult());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
