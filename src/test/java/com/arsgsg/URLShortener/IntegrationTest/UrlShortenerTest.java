@@ -36,7 +36,7 @@ public class UrlShortenerTest {
         ShortUrl shortUrl = new ShortUrl(storedUrl, convertShortUrl);
         repository.save(shortUrl);
     }
-    @AfterEach
+    @AfterEach //다음 테스트에 영향이 가지 않게 하기 위함.
     public void tearDown() throws Exception{
         System.out.println("====tear down start========");
         repository.deleteAll();
@@ -44,7 +44,7 @@ public class UrlShortenerTest {
     @Test
     public void createConvertUrlTest(){
         //given
-        String testResultUrl = converter.getEncodingUrl(repository.getCountUrls().intValue() + 1);
+        String testResultUrl = converter.getEncodingUrl(repository.countUrls().intValue() + 1);
         ConvertShortUrlDto requestDto = new ConvertShortUrlDto(requestUrl);
         String url = "http://localhost:" + port + "/api";
         //when

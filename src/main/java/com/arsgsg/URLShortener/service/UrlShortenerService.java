@@ -27,8 +27,9 @@ public class UrlShortenerService {
         Optional<ShortUrl> findUrl = repository.findByOriginUrl(dto.getOriginUrl());
         if (findUrl.isPresent()) {
             resultUrl = urlConverter.concatUrl(findUrl.get().getShortUrl());
-        } else {
-            int urlCount = repository.getCountUrls().intValue();
+        }
+        else {
+            int urlCount = repository.countUrls().intValue();
             repository.save(new ShortUrl(dto.getOriginUrl(), urlConverter.convertId2ShortUrl(urlCount + 1)));
             resultUrl = urlConverter.getEncodingUrl(urlCount + 1);
         }

@@ -1,4 +1,4 @@
-package com.arsgsg.URLShortener.controller;
+package com.arsgsg.URLShortener.presentation;
 
 import com.arsgsg.URLShortener.service.UrlShortenerService;
 import com.arsgsg.URLShortener.service.request.ConvertShortUrlDto;

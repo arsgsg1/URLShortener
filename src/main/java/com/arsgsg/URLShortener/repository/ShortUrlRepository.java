@@ -12,5 +12,5 @@ public interface ShortUrlRepository extends JpaRepository<ShortUrl, Long> {
     Optional<ShortUrl> findByOriginUrl(String originUrl);
     Optional<ShortUrl> findByShortUrl(String shortUrl);
     @Query("SELECT COUNT(shortUrl.id) FROM ShortUrl shortUrl")
-    Long getCountUrls();
+    Long countUrls();
 }
