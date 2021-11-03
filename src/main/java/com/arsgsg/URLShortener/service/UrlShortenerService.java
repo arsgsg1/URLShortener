@@ -1,6 +1,8 @@
 package com.arsgsg.URLShortener.service;
 
 import com.arsgsg.URLShortener.domain.ShortUrl;
+import com.arsgsg.URLShortener.presentation.common.ErrorCode;
+import com.arsgsg.URLShortener.presentation.common.UrlShortenerException;
 import com.arsgsg.URLShortener.repository.ShortUrlRepository;
 import com.arsgsg.URLShortener.service.request.ConvertShortUrlDto;
 import com.arsgsg.URLShortener.util.UrlConverter;
@@ -19,7 +21,7 @@ public class UrlShortenerService {
     @Transactional(readOnly = true)
     public String getOriginUrlFromShortUrl(String shortUrl){
         return repository.findByShortUrl(shortUrl).
-                orElseThrow(() -> new IllegalArgumentException("url이 없습니다.")).getOriginUrl();
+                orElseThrow(() -> new UrlShortenerException(ErrorCode.NO_SUCH_RESTORED_URL)).getOriginUrl();
     }
     @Transactional
     public String convertShortUrl(ConvertShortUrlDto dto) {
