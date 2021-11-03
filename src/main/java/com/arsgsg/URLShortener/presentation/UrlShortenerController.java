@@ -24,7 +24,7 @@ public class UrlShortenerController {
     }
     @GetMapping("/api/{shortUrl}")
     public void redirectUrl(@PathVariable String shortUrl, HttpServletResponse response) throws IOException {
-        String originUrl = urlShortenerService.getOriginUrl(shortUrl);
+        String originUrl = urlShortenerService.getOriginUrlFromShortUrl(shortUrl);
         response.sendRedirect(originUrl);
     }
 }

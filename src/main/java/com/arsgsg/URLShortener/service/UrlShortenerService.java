@@ -17,7 +17,7 @@ public class UrlShortenerService {
     private final UrlConverter urlConverter;
 
     @Transactional(readOnly = true)
-    public String getOriginUrl(String shortUrl){
+    public String getOriginUrlFromShortUrl(String shortUrl){
         return repository.findByShortUrl(shortUrl).
                 orElseThrow(() -> new IllegalArgumentException("url이 없습니다.")).getOriginUrl();
     }
