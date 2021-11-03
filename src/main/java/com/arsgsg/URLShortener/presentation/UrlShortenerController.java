@@ -13,16 +13,17 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class UrlShortenerController {
     private final UrlShortenerService urlShortenerService;
 
-    @PostMapping("/api")
+    @PostMapping
     public ResponseEntity convertShortURL(@Valid @RequestBody ConvertShortUrlDto dto){
         String convertedUrl = urlShortenerService.convertShortUrl(dto);
         GetConvertUrlDto resultDto = new GetConvertUrlDto(dto.getOriginUrl(), convertedUrl);
         return ResponseEntity.ok(resultDto);
     }
-    @GetMapping("/api/{shortUrl}")
+    @GetMapping("/{shortUrl}")
     public void redirectUrl(@PathVariable String shortUrl, HttpServletResponse response) throws IOException {
         String originUrl = urlShortenerService.getOriginUrlFromShortUrl(shortUrl);
         response.sendRedirect(originUrl);
