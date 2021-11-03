@@ -52,6 +52,7 @@ public class UrlShortenerTest {
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody().getConvertedUrl()).isEqualTo(testResultUrl);
+        assertThat(repository.countUrls().intValue()).isEqualTo(2);
     }
     @Test
     public void readOriginUrlTest(){
@@ -61,5 +62,6 @@ public class UrlShortenerTest {
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
         //then
         assertThat(responseEntity.getHeaders().getLocation().toString().contains(storedUrl.substring(7))).isTrue();
+        assertThat(repository.countUrls().intValue()).isEqualTo(1);
     }
 }
